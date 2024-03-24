@@ -319,7 +319,6 @@ def load_model(whisper_arch,
         "word_timestamps": False,
         "prepend_punctuations": "\"'“¿([{-",
         "append_punctuations": "\"'.。,，!！?？:：”)]}、",
-        "suppress_numerals": False,
         "max_new_tokens": None,
         "clip_timestamps": None,
         "hallucination_silence_threshold": None,
@@ -328,8 +327,7 @@ def load_model(whisper_arch,
     if asr_options is not None:
         default_asr_options.update(asr_options)
 
-    suppress_numerals = default_asr_options["suppress_numerals"]
-    del default_asr_options["suppress_numerals"]
+    suppress_numerals = default_asr_options.pop("suppress_numerals", False)
 
     default_asr_options = faster_whisper.transcribe.TranscriptionOptions(**default_asr_options)
 
